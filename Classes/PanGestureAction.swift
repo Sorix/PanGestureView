@@ -8,13 +8,13 @@
 
 import UIKit
 
-public class PanGestureAction: NSObject {
-    public var swipeDirection: PanGestureViewSwipeDirection!
-    public var backgroundColor: UIColor?
-    public var tintColor: UIColor?
-    public var image:UIImage?
-    public var isActive:Bool = false
-    public var didTriggerBlock: ((swipeDirection: PanGestureViewSwipeDirection) -> ())?
+open class PanGestureAction: NSObject {
+    open var swipeDirection: PanGestureViewSwipeDirection!
+    open var backgroundColor: UIColor?
+    open var tintColor: UIColor?
+    open var image:UIImage?
+    open var isActive:Bool = false
+    open var didTriggerBlock: ((_ swipeDirection: PanGestureViewSwipeDirection) -> ())?
     
     public convenience init(swipeDirection: PanGestureViewSwipeDirection, image:UIImage?) {
         self.init()

@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.edgesForExtendedLayout = UIRectEdge.None
+        self.edgesForExtendedLayout = UIRectEdge()
         setupViews()
         setupActions()
         
@@ -27,9 +27,9 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    private func setupActions(){
+    fileprivate func setupActions(){
         
-        let action = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.Right, image: UIImage(named: "chevron-left")!)
+        let action = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.right, image: UIImage(named: "chevron-left")!)
         action.backgroundColor = UIColor(red:0.25, green:0.74, blue:0.55, alpha:1)
         action.didTriggerBlock = {
             direction in
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         }
         swipeView.addAction(action)
         
-        let action2 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.Left, image: UIImage(named: "chevron-right")!)
+        let action2 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.left, image: UIImage(named: "chevron-right")!)
         action2.backgroundColor = UIColor(red:0.31, green:0.59, blue:0.7, alpha:1)
         action2.didTriggerBlock = {
             direction in
@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         }
         swipeView.addAction(action2)
         
-        let action3 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.Up, image: UIImage(named: "chevron-down")!)
+        let action3 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.up, image: UIImage(named: "chevron-down")!)
         action3.backgroundColor = UIColor(red:0.57, green:0.56, blue:0.95, alpha:1)
         action3.didTriggerBlock = {
             direction in
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         
         swipeView.addAction(action3)
         
-        let action4 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.Down, image: UIImage(named: "chevron-up")!)
+        let action4 = PanGestureAction(swipeDirection: PanGestureViewSwipeDirection.down, image: UIImage(named: "chevron-up")!)
         action4.backgroundColor = UIColor(red:0.96, green:0.7, blue:0.31, alpha:1)
         action4.didTriggerBlock = {
             direction in
@@ -70,16 +70,16 @@ class ViewController: UIViewController {
         swipeView.addAction(action4)
     }
     
-    private func setupViews(){
+    fileprivate func setupViews(){
 
-        let container = UIView(frame: CGRectMake(0,0,200,200))
+        let container = UIView(frame: CGRect(x: 0,y: 0,width: 200,height: 200))
         container.backgroundColor = UIColor(white: 0.9, alpha: 1)
         container.layer.cornerRadius = 100
-        container.autoresizingMask = [UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleBottomMargin]
+        container.autoresizingMask = [UIViewAutoresizing.flexibleLeftMargin, UIViewAutoresizing.flexibleRightMargin, UIViewAutoresizing.flexibleTopMargin, UIViewAutoresizing.flexibleBottomMargin]
         
-        label = UILabel(frame: CGRectMake(0,0,140,30))
+        label = UILabel(frame: CGRect(x: 0,y: 0,width: 140,height: 30))
         label.text = "Pan Anywhere"
-        label.textAlignment = NSTextAlignment.Center
+        label.textAlignment = NSTextAlignment.center
         label.center = container.center
         
         container.addSubview(label)
@@ -89,21 +89,21 @@ class ViewController: UIViewController {
         
     }
     
-    private func actionDidTrigger(action: PanGestureAction){
+    fileprivate func actionDidTrigger(_ action: PanGestureAction){
         
         let container = self.label.superview!
         
-        UIView.animateWithDuration(0.4) { () -> Void in
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             
             container.backgroundColor = action.backgroundColor
             self.label.text = "Panned \(action.swipeDirection)"
-            self.label.textColor = UIColor.whiteColor()
+            self.label.textColor = UIColor.white
 
-        }
+        }) 
         
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
